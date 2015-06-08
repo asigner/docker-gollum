@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 
-MAINTAINER Takahiro Suzuki <suttang@gmail.com>
+MAINTAINER Andy Signer <docker@signer.info> 
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -18,7 +18,10 @@ RUN gem install gollum redcarpet github-markdown
 RUN mkdir /root/wikidata
 RUN git init /root/wikidata
 
+# Copy start script
+COPY run.sh /
+
 # Expose default gollum port 4567
 EXPOSE 4567
 
-ENTRYPOINT ["/usr/local/bin/gollum", "/root/wikidata"]
+ENTRYPOINT ["/run.sh"]
